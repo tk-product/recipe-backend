@@ -10,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class RegisterController extends BaseController {
 
     RegisterService registerService;

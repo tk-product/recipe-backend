@@ -13,11 +13,11 @@ public class BaseAdvice {
     protected HttpHeaders createHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        headers.add("Access-Control-Allow-Headers", "*");
-        headers.add("Access-Control-Allow-Credentials", "true");
+//        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+//        headers.add("Access-Control-Allow-Origin", "*");
+//        headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//        headers.add("Access-Control-Allow-Headers", "*");
+//        headers.add("Access-Control-Allow-Credentials", "true");
         return headers;
     }
 }

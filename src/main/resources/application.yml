@@ -8,3 +8,8 @@ spring:
     password: password
   messages:
     basename: messages,validation-messages
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2GB
+      max-request-size: 2GB

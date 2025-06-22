@@ -18,11 +18,11 @@ public class DebugLogAspect extends BaseAspect {
 
     private ObjectMapper objectMapper;
 
-    @Pointcut("execution(* com.example.attendance.app..*.controller..*(..))")
+    @Pointcut("execution(* com.example.recipe.app..*.controller..*(..))")
     public void controllerMethods() {
     }
 
-    @Pointcut("execution(* com.example.attendance.app..*.service..*(..))")
+    @Pointcut("execution(* com.example.recipe.app..*.service..*(..))")
     public void serviceMethods() {
     }
 

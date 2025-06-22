@@ -35,7 +35,6 @@ public class RequestResponseLoggingFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
         ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(request);
         ContentCachingResponseWrapper wrappedResponse = new ContentCachingResponseWrapper(response);
 
@@ -47,7 +46,6 @@ public class RequestResponseLoggingFilter extends OncePerRequestFilter {
         // キャッシュ無効
         wrappedResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         String requestId = UUID.randomUUID().toString();
-
         // MDC (Mapped Diagnostic Context) にリクエストIDを保存（ロギングに利用できる）
         MDC.put(REQUEST_ID_HEADER, requestId);
 
@@ -68,13 +66,16 @@ public class RequestResponseLoggingFilter extends OncePerRequestFilter {
         String sessionId = request.getSession().getId();
         String method = request.getMethod();
         String uri = request.getRequestURI();
-        // 最初のデコード
-        String firstDecode = URLDecoder.decode(request.getQueryString(), StandardCharsets.UTF_8);
-        // 二度目のデコード
-        String secondDecode = URLDecoder.decode(firstDecode, StandardCharsets.UTF_8);
+        String secondDecode = "";
+        if (request.getQueryString() != null) {
+            // 最初のデコード
+            String firstDecode = URLDecoder.decode(request.getQueryString(), StandardCharsets.UTF_8);
+            // 二度目のデコード
+            secondDecode = URLDecoder.decode(firstDecode, StandardCharsets.UTF_8);
+
+        }
         String headers = getRequestHeaders(request);
         String requestBody = getRequestBody(request);
-
         logger.info("SessionID: {}, RequestID: {}, Request URI: {} {}{}", sessionId, requestId, method, uri, (secondDecode != null ? "?" + secondDecode : ""));
         logger.info("SessionID: {}, RequestID: {}, Request Headers: {}", sessionId, requestId, headers);
         logger.info("SessionID: {}, RequestID: {}, Request Body: {}", sessionId, requestId, requestBody);
